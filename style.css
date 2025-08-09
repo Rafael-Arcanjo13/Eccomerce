@@ -83,27 +83,11 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    -webkit-overflow-scrolling: touch;
     padding: 0.5rem 2rem;
     gap: 1rem;
     width: 100%;
     max-width: 1200px;
 }
-
-.categories-bar::-webkit-scrollbar {
-    display: none;
-}
-
-.categories-bar > * {
-    flex: 0 0 280px;
-}
-
-/* @media (max-width: 916px) { 
-    .categories-bar {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    }
-} */
 
 .category-btn {
     display: flex;
