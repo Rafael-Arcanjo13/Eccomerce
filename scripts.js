@@ -1,3 +1,5 @@
+let textSearch = ''
+let categoriaAtual = 'all'
 let products = [
     {
         id: 1,
@@ -82,11 +84,21 @@ let products = [
 ];
 
 let containerProducts = document.querySelector('.products-container');
+let input = document.querySelector('.search-input');
+let buttons = document.querySelectorAll('.category-btn');
 
 function mostrarProdutos() {
-    let htmlProducts = "";
+    let htmlProducts = '';
 
-    products.forEach(product => {
+    let filteredProducts = products.filter(product => {
+
+        passouCategoria = (categoriaAtual === 'all' || product.categoria === categoriaAtual)
+
+        let passedSearch = product.nome.toLowerCase().includes(textSearch.toLowerCase());
+        return passedSearch && passouCategoria;
+    })
+
+    filteredProducts.forEach(product => {
         htmlProducts += `
         <div class="product-card">
                 <img class="product-img" src="${product.imagem}" alt="iphone 15 pro max">
@@ -103,4 +115,33 @@ function mostrarProdutos() {
     containerProducts.innerHTML = htmlProducts;
 }
 
-window.onload = mostrarProdutos;
+function pesquisar() {
+    textSearch = input.value;
+
+    mostrarProdutos();
+}
+
+function trocarCategoria(categoria) {
+    categoriaAtual = categoria;
+
+    buttons.forEach(btn => {
+        btn.classList.remove('active');
+        if(btn.getAttribute('data-category') === categoria) {
+            btn.classList.add('active');
+        }
+    })
+
+    mostrarProdutos();
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+    mostrarProdutos();
+    input.addEventListener('input', pesquisar);
+
+    buttons.forEach( btn => {
+        btn.addEventListener('click', () => {
+            let categoria = btn.getAttribute('data-category');
+            trocarCategoria(categoria);
+        });
+    })
+})
