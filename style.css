@@ -89,6 +89,19 @@ header {
     max-width: 1200px;
 }
 
+@media (max-width: 920px) {
+    .categories-bar {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+
+    .category-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
 .category-btn {
     display: flex;
     gap: 0.5rem;
